@@ -1,556 +1,151 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Will You Be My Valentine? 💕</title>
-    <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
-    <link href="https://fonts.googleapis.com/css2?family=Pacifico&family=Quicksand:wght@400;600&display=swap" rel="stylesheet">
-    <style>
-        * {
-            font-family: 'Quicksand', sans-serif;
-        }
-        
-        .font-romantic {
-            font-family: 'Pacifico', cursive;
-        }
-        
-        /* Floating hearts animation */
-        @keyframes float {
-            0%, 100% { transform: translateY(0) rotate(0deg); opacity: 0.7; }
-            50% { transform: translateY(-20px) rotate(10deg); opacity: 1; }
-        }
-        
-        @keyframes pulse {
-            0%, 100% { transform: scale(1); }
-            50% { transform: scale(1.05); }
-        }
-        
-        @keyframes confetti {
-            0% { transform: translateY(0) rotate(0deg); opacity: 1; }
-            100% { transform: translateY(100vh) rotate(720deg); opacity: 0; }
-        }
-        
-        .heart-float {
-            animation: float 3s ease-in-out infinite;
-        }
-        
-        .pulse {
-            animation: pulse 2s ease-in-out infinite;
-        }
-        
-        .confetti {
-            position: fixed;
-            width: 10px;
-            height: 10px;
-            animation: confetti 3s ease-out forwards;
-            pointer-events: none;
-            z-index: 100;
-        }
-        
-        /* Screen transitions */
-        .screen {
-            transition: opacity 0.5s ease, transform 0.5s ease;
-        }
-        
-        .screen-hidden {
-            opacity: 0;
-            transform: scale(0.9);
-            pointer-events: none;
-            position: absolute;
-        }
-        
-        .screen-visible {
-            opacity: 1;
-            transform: scale(1);
-        }
-        
-        /* Button styles */
-        .btn-yes {
-            background: linear-gradient(135deg, #ff6b9d, #ff4081);
-            box-shadow: 0 4px 15px rgba(255, 64, 129, 0.4);
-            transition: all 0.3s ease;
-        }
-        
-        .btn-yes:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 6px 20px rgba(255, 64, 129, 0.6);
-        }
-        
-        .btn-no {
-            background: linear-gradient(135deg, #ff9a9e, #fecfef);
-            box-shadow: 0 4px 15px rgba(255, 154, 158, 0.4);
-            transition: all 0.1s ease;
-        }
-        
-        .btn-no:hover {
-            transform: scale(1.05);
-        }
-        
-        /* Background pattern */
-        .bg-pattern {
-            background: linear-gradient(135deg, #fff5f7 0%, #ffe4e9 50%, #ffd1dc 100%);
-            background-size: 400% 400%;
-            animation: gradientShift 15s ease infinite;
-        }
-        
-        @keyframes gradientShift {
-            0% { background-position: 0% 50%; }
-            50% { background-position: 100% 50%; }
-            100% { background-position: 0% 50%; }
-        }
-        
-        /* Sparkle effect */
-        .sparkle {
-            position: absolute;
-            width: 4px;
-            height: 4px;
-            background: white;
-            border-radius: 50%;
-            animation: sparkle 2s ease-in-out infinite;
-            box-shadow: 0 0 10px #fff, 0 0 20px #ff69b4;
-        }
-        
-        @keyframes sparkle {
-            0%, 100% { opacity: 0; transform: scale(0); }
-            50% { opacity: 1; transform: scale(1); }
-        }
-        
-        /* Glow animation for photo */
-        @keyframes glow {
-            0%, 100% { box-shadow: 0 0 20px rgba(255, 105, 180, 0.5); }
-            50% { box-shadow: 0 0 40px rgba(255, 105, 180, 0.8), 0 0 60px rgba(255, 182, 193, 0.6); }
-        }
-        
-        .photo-glow {
-            animation: glow 3s ease-in-out infinite;
-        }
-        
-        /* Floating animation for decorative elements */
-        @keyframes floatSoft {
-            0%, 100% { transform: translateY(0) rotate(-5deg); }
-            50% { transform: translateY(-10px) rotate(5deg); }
-        }
-        
-        .float-soft {
-            animation: floatSoft 4s ease-in-out infinite;
-        }
-        
-        /* Card entrance animation */
-        @keyframes slideUp {
-            0% { opacity: 0; transform: translateY(30px); }
-            100% { opacity: 1; transform: translateY(0); }
-        }
-        
-        .animate-slide-up {
-            animation: slideUp 0.6s ease-out forwards;
-        }
-        
-        /* Heart beat animation */
-        @keyframes heartbeat {
-            0%, 100% { transform: scale(1); }
-            25% { transform: scale(1.1); }
-            50% { transform: scale(1); }
-            75% { transform: scale(1.1); }
-        }
-        
-        .heartbeat {
-            animation: heartbeat 1.5s ease-in-out infinite;
-        }
-    </style>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Will You Be My Valentine? 💕</title>
+
+<script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+
+<link href="https://fonts.googleapis.com/css2?family=Pacifico&family=Quicksand:wght@400;600&display=swap" rel="stylesheet">
+
+<style>
+* { font-family: 'Quicksand', sans-serif; }
+.font-romantic { font-family: 'Pacifico', cursive; }
+
+/* Animations */
+@keyframes float {
+0%,100%{transform:translateY(0)}
+50%{transform:translateY(-20px)}
+}
+
+.heart-float{animation:float 3s infinite}
+
+.screen{transition:.5s}
+.screen-hidden{opacity:0;transform:scale(.9);pointer-events:none;position:absolute}
+.screen-visible{opacity:1}
+
+.bg-pattern{
+background:linear-gradient(135deg,#fff5f7,#ffd1dc);
+}
+
+.btn-yes{
+background:linear-gradient(135deg,#ff6b9d,#ff4081);
+color:white;
+}
+
+.btn-no{
+background:linear-gradient(135deg,#ff9a9e,#fecfef);
+}
+
+.confetti{
+position:fixed;
+animation:fall 3s linear forwards;
+}
+
+@keyframes fall{
+to{transform:translateY(100vh);opacity:0}
+}
+</style>
 </head>
+
+<!-- ✅ overflow-hidden removed -->
 <body class="bg-pattern min-h-screen">
 
-    
-    <!-- First Screen - Question -->
-    <div id="screen1" class="screen screen-visible min-h-screen flex flex-col items-center justify-center p-4 relative">
-        
-        <!-- Floating Hearts Background -->
-        <div class="absolute inset-0 overflow-hidden pointer-events-none">
-            <div class="heart-float absolute top-10 left-10 text-4xl opacity-30" style="animation-delay: 0s;">💕</div>
-            <div class="heart-float absolute top-20 right-20 text-3xl opacity-30" style="animation-delay: 0.5s;">💗</div>
-            <div class="heart-float absolute bottom-20 left-20 text-2xl opacity-30" style="animation-delay: 1s;">💖</div>
-            <div class="heart-float absolute bottom-10 right-10 text-4xl opacity-30" style="animation-delay: 1.5s;">💝</div>
-            <div class="heart-float absolute top-1/2 left-5 text-2xl opacity-20" style="animation-delay: 2s;">❤️</div>
-            <div class="heart-float absolute top-1/3 right-5 text-3xl opacity-20" style="animation-delay: 2.5s;">💗</div>
-        </div>
-        
-        <!-- Main Content -->
-        <div class="text-center z-10 max-w-lg">
-            <!-- Title with Hearts -->
-            <div class="flex items-center justify-center gap-4 mb-6">
-                <span class="text-4xl heart-float">💕</span>
-                <h1 class="font-romantic text-4xl md:text-5xl text-pink-600 drop-shadow-lg">
-                    Do you want to be
-                </h1>
-                <span class="text-4xl heart-float" style="animation-delay: 0.3s;">💕</span>
-            </div>
-            
-            <h2 class="font-romantic text-5xl md:text-6xl text-red-500 mb-8 drop-shadow-lg pulse">
-                my Valentine?
-            </h2>
-            
-            <!-- Subtitle with hearts -->
-            <p class="text-pink-400 text-lg mb-10 font-semibold">
-                💝 Choose wisely... 💝
-            </p>
-            
-            <!-- Buttons Container -->
-            <div class="flex flex-col sm:flex-row gap-4 items-center justify-center">
-                <!-- Yes Button -->
-                <button id="btnYes" onclick="clickYes()" 
-                    class="btn-yes text-white font-bold py-4 px-10 rounded-full text-xl sm:text-2xl hover:scale-105 transition-transform">
-                    💖 Yes 💖
-                </button>
-                
-                <!-- No Button -->
-                <button id="btnNo" onmouseenter="moveNoButton()" onclick="moveNoButton()" 
-                    class="btn-no text-pink-600 font-bold py-4 px-10 rounded-full text-xl sm:text-2xl relative">
-                    😅 No
-                </button>
-            </div>
-            
-            <!-- Cute hint -->
-            <p class="mt-8 text-pink-300 text-sm animate-pulse">
-                ✨ Hint: The "Yes" button is waiting for you! ✨
-            </p>
-        </div>
-    </div>
-    
-    <!-- Second Screen - Message -->
-    <div id="screen2" class="screen screen-hidden min-h-screen flex flex-col items-center justify-center p-4 relative overflow-y-auto" style="background: linear-gradient(135deg, #fff5f7 0%, #ffe4e9 25%, #ffd1dc 50%, #ffb6c1 75%, #ff9a9e 100%);">
-        
-        <!-- Enhanced Background with animated gradient and sparkles -->
-        <body class="bg-pattern min-h-screen">
-            <!-- Animated gradient overlay -->
-            <div class="absolute inset-0 bg-gradient-to-br from-pink-200/40 via-red-100/30 to-rose-200/40 animate-pulse"></div>
-            
-            <!-- Floating hearts with different sizes and delays -->
-            <div class="heart-float absolute top-5 left-5 text-3xl opacity-40" style="animation-delay: 0s;">💕</div>
-            <div class="heart-float absolute top-16 right-8 text-2xl opacity-30" style="animation-delay: 0.3s;">💗</div>
-            <div class="heart-float absolute top-28 left-1/4 text-xl opacity-25" style="animation-delay: 0.6s;">💖</div>
-            <div class="heart-float absolute bottom-32 right-12 text-2xl opacity-35" style="animation-delay: 0.9s;">💝</div>
-            <div class="heart-float absolute bottom-16 left-8 text-3xl opacity-30" style="animation-delay: 1.2s;">❤️</div>
-            <div class="heart-float absolute top-1/3 right-1/4 text-xl opacity-25" style="animation-delay: 1.5s;">💕</div>
-            <div class="heart-float absolute bottom-1/4 left-1/3 text-2xl opacity-30" style="animation-delay: 1.8s;">💗</div>
-            
-            <!-- Sparkle effects -->
-            <div class="sparkle" style="top: 15%; left: 20%; animation-delay: 0s;"></div>
-            <div class="sparkle" style="top: 25%; right: 25%; animation-delay: 0.5s;"></div>
-            <div class="sparkle" style="top: 60%; left: 15%; animation-delay: 1s;"></div>
-            <div class="sparkle" style="top: 70%; right: 20%; animation-delay: 1.5s;"></div>
-            <div class="sparkle" style="top: 40%; left: 30%; animation-delay: 2s;"></div>
-            <div class="sparkle" style="top: 80%; right: 35%; animation-delay: 2.5s;"></div>
-        </div>
-        
-        <!-- Main Content -->
-        <div class="text-center z-10 max-w-2xl w-full">
-            
-            <!-- Photo Section with enhanced design -->
-            <div class="mb-10 relative inline-block">
-                <!-- Outer glow ring -->
-                <div class="absolute inset-0 rounded-full bg-gradient-to-r from-pink-400 via-red-400 to-pink-400 blur-xl opacity-60 animate-pulse"></div>
-                
-                <!-- Main photo container -->
-                <div class="relative w-48 h-48 md:w-72 md:h-72 rounded-full overflow-hidden border-4 border-white shadow-2xl mx-auto bg-white flex items-center justify-center photo-glow">
-                    <!-- Decorative heart border -->
-                    <div class="absolute inset-0 border-4 border-pink-300 rounded-full opacity-50"></div>
-                    
-                    <!-- 
-                        =========================================
-                        📸 IMAGE URL TO CHANGE:
-                        Replace the src below with your image URL
-                        Example: src="https://example.com/your-photo.jpg"
-                        =========================================
-                    -->
-                    <img id="valentinePhoto" 
-                        src="https://i.ibb.co/NnZ9KKfH/Screenshot-2026-02-13-231427.png"
-                        alt="Aditya thakur" 
-                        class="w-full h-full object-cover hover:scale-110 transition-transform duration-500">
-                </div>
-                
-                <!-- Floating hearts around photo -->
-                <div class="absolute -top-3 -left-3 text-2xl animate-bounce" style="animation-delay: 0.1s;">💕</div>
-                <div class="absolute -top-3 -right-3 text-2xl animate-bounce" style="animation-delay: 0.2s;">💖</div>
-                <div class="absolute -bottom-3 -left-3 text-2xl animate-bounce" style="animation-delay: 0.3s;">💗</div>
-                <div class="absolute -bottom-3 -right-3 text-2xl animate-bounce" style="animation-delay: 0.4s;">💝</div>
-                
-                <!-- Crown/Star decoration -->
-                <div class="absolute -top-8 left-1/2 transform -translate-x-1/2 text-3xl animate-bounce">
-                    👑
-                </div>
-            </div>
-            
-            <!-- Title under photo -->
-            <h2 class="font-romantic text-3xl md:text-4xl text-red-500 mb-6 drop-shadow-lg">
-                My Valentine 💕
-            </h2>
-            
-            <!-- Message Card with enhanced design -->
-            <div class="relative mb-8">
-                <!-- Card shadow and glow -->
-                <div class="absolute inset-0 bg-gradient-to-r from-pink-300 to-red-300 rounded-3xl blur-lg opacity-50 transform scale-105"></div>
-                
-                <!-- Main card -->
-                <div class="relative bg-white/90 backdrop-blur-md rounded-3xl p-6 md:p-10 shadow-2xl border-2 border-pink-200 mx-4 overflow-hidden animate-slide-up">
-                    <!-- Decorative corners -->
-                    <div class="absolute top-0 left-0 w-12 h-12 bg-gradient-to-br from-pink-200 to-transparent rounded-tl-3xl"></div>
-                    <div class="absolute top-0 right-0 w-12 h-12 bg-gradient-to-bl from-pink-200 to-transparent rounded-tr-3xl"></div>
-                    <div class="absolute bottom-0 left-0 w-12 h-12 bg-gradient-to-tr from-pink-200 to-transparent rounded-bl-3xl"></div>
-                    <div class="absolute bottom-0 right-0 w-12 h-12 bg-gradient-to-tl from-pink-200 to-transparent rounded-br-3xl"></div>
-                    
-                    <!-- Envelope icon -->
-                    <div class="text-5xl mb-4 animate-bounce">💌</div>
-                    
-                    <!-- 
-                        =========================================
-                        📝 MESSAGE TEXT TO CHANGE:
-                        Replace the text inside the p tag below
-                        with your custom romantic message
-                        =========================================
-                    -->
-                    <p id="romanticMessage" 
-class="font-romantic text-2xl md:text-3xl text-pink-600 leading-relaxed relative z-10 whitespace-pre-line">
+<!-- SCREEN 1 -->
+<div id="screen1" class="screen screen-visible min-h-screen flex flex-col items-center justify-center text-center p-4">
 
-                        Happy Valentine’s Day, my love ❤️
-Since 18th August 2024, when we started dating, my life has changed in the most beautiful way. We may have fallen in love a little later, but from the very beginning, being with you made me feel truly lovable. You didn’t just love me, you made me fall in love with you in the most unexpected and magical way.
-Yes, we fight a lot sometimes, but even in our fights, my heart has never stopped choosing you. No matter what happens, you are always here in my heart, holding a very special place that no one else ever could.
-I truly hope we end up together, growing, loving, and choosing each other every single day. I love you more than words can explain. 💖
-                    </p>
-                    
-                    <!-- Decorative hearts -->
-                    <div class="mt-6 flex justify-center gap-2 relative z-10">
-                        <span class="text-2xl animate-pulse" style="animation-delay: 0s;">💕</span>
-                        <span class="text-3xl animate-pulse" style="animation-delay: 0.2s;">💖</span>
-                        <span class="text-2xl animate-pulse" style="animation-delay: 0.4s;">💕</span>
-                    </div>
-                </div>
-            </div>
-            
-            <!-- Thank you text with heart animation -->
-            <div class="bg-gradient-to-r from-pink-100 to-red-100 rounded-full px-6 py-3 inline-block mb-6">
-                <p class="text-pink-600 text-lg font-semibold">
-                    <span class="inline-block animate-bounce">💕</span>
-                    Thank you for saying Yes!
-                    <span class="inline-block animate-bounce" style="animation-delay: 0.2s;">💕</span>
-                </p>
-            </div>
-            
-            <!-- Return button with enhanced styling -->
-            <div class="mt-6">
-                <button onclick="goBack()" 
-                    class="group flex items-center justify-center gap-2 text-pink-400 hover:text-pink-600 hover:scale-105 transition-all duration-300 font-semibold">
-                    <span class="transform group-hover:-translate-x-1 transition-transform">←</span>
-                    <span>Back to question</span>
-                    <span class="transform group-hover:translate-x-1 transition-transform">→</span>
-                </button>
-            </div>
-            
-            <!-- Decorative footer hearts -->
-            <div class="mt-8 flex justify-center gap-3 opacity-60">
-                <span class="text-xl">💕</span>
-                <span class="text-xl">💖</span>
-                <span class="text-xl">💗</span>
-                <span class="text-xl">💝</span>
-                <span class="text-xl">💕</span>
-            </div>
-        </div>
-    </div>
-    
-    <!-- Confetti Container -->
-    <div id="confettiContainer"></div>
+<h1 class="font-romantic text-5xl text-pink-600 mb-6">
+Do you want to be my Valentine? 💕
+</h1>
 
-    <script>
-        // =========================================
-        // 🎯 CONFIGURATION SECTION
-        // 
-        // 1. IMAGE URL (YES Option):
-        //    Find the img tag in screen2 and change the src attribute
-        //    Look for the comment "IMAGE URL TO CHANGE" above
-        //
-        // 2. MESSAGE TEXT (YES Option):
-        //    Find the p tag in screen2 and change the text
-        //    Look for the comment "MESSAGE TEXT TO CHANGE" above
-        // =========================================
+<div class="flex gap-4">
+<button id="btnYes" onclick="clickYes()" class="btn-yes px-8 py-4 rounded-full text-xl">
+💖 Yes
+</button>
 
-        // Screen management
-        const screen1 = document.getElementById('screen1');
-        const screen2 = document.getElementById('screen2');
-        
-        // Get button positions for tracking
-        function getButtonPositions() {
-            const btnNo = document.getElementById('btnNo');
-            const rect = btnNo.getBoundingClientRect();
-            return {
-                x: rect.left,
-                y: rect.top,
-                width: rect.width,
-                height: rect.height
-            };
-        }
-        
-        // Move the "No" button to a random position
-        function moveNoButton() {
-            const btnNo = document.getElementById('btnNo');
-            const btnYes = document.getElementById('btnYes');
-            const yesRect = btnYes.getBoundingClientRect();
-            
-            // Get viewport dimensions
-            const viewportWidth = window.innerWidth;
-            const viewportHeight = window.innerHeight;
-            
-            // Calculate safe zone around "Yes" button (so it doesn't overlap)
-            const safeZone = {
-                left: Math.max(20, yesRect.left - 150),
-                right: Math.min(viewportWidth - 20, yesRect.right + 150),
-                top: Math.max(20, yesRect.top - 100),
-                bottom: Math.min(viewportHeight - 20, yesRect.bottom + 100)
-            };
-            
-            // Generate random position that's NOT in the safe zone
-            let newX, newY;
-            let attempts = 0;
-            
-            do {
-                // Random position within viewport (with padding)
-                newX = 20 + Math.random() * (viewportWidth - btnNo.offsetWidth - 40);
-                newY = 20 + Math.random() * (viewportHeight - btnNo.offsetHeight - 40);
-                attempts++;
-            } while (
-                // Keep trying if position is in the safe zone (around Yes button)
-                (newX > safeZone.left && newX < safeZone.right &&
-                 newY > safeZone.top && newY < safeZone.bottom) &&
-                attempts < 20 // Safety limit
-            );
-            
-            // Apply new position
-            btnNo.style.position = 'fixed';
-            btnNo.style.left = newX + 'px';
-            btnNo.style.top = newY + 'px';
-            btnNo.style.zIndex = '100';
-            
-            // Add a little shake effect
-            btnNo.style.transform = 'scale(1.1) rotate(5deg)';
-            setTimeout(() => {
-                btnNo.style.transform = 'scale(1) rotate(0deg)';
-            }, 150);
-            
-            // Show a playful message
-            showPlayfulMessage();
-        }
-        
-        // Show playful messages when trying to click No
-        function showPlayfulMessage() {
-            const messages = [
-                "Nooo! 😅",
-                "Try again! 💕",
-                "You can't catch me! 💖",
-                "Nice try! 💝",
-                "Hehe! 😄",
-                "Keep trying! 💗",
-                "Almost! 😜",
-                "Nope! 💕"
-            ];
-            
-            // Create temporary message
-            const msg = document.createElement('div');
-            msg.textContent = messages[Math.floor(Math.random() * messages.length)];
-            msg.className = 'fixed text-2xl font-bold text-pink-500 pointer-events-none z-50';
-            msg.style.transition = 'all 0.5s ease';
-            msg.style.left = Math.random() * (window.innerWidth - 100) + 'px';
-            msg.style.top = Math.random() * (window.innerHeight - 50) + 'px';
-            msg.style.opacity = '1';
-            
-            document.body.appendChild(msg);
-            
-            // Animate and remove
-            setTimeout(() => {
-                msg.style.opacity = '0';
-                msg.style.transform = 'translateY(-30px)';
-            }, 50);
-            
-            setTimeout(() => {
-                msg.remove();
-            }, 600);
-        }
-        
-        // Create confetti effect
-        function createConfetti() {
-            const container = document.getElementById('confettiContainer');
-            const colors = ['#ff6b9d', '#ff4081', '#ff9a9e', '#fecfef', '#ffb6c1', '#ff69b4'];
-            const shapes = ['❤️', '💕', '💗', '💖', '💝', '✨'];
-            
-            for (let i = 0; i < 50; i++) {
-                setTimeout(() => {
-                    const confetti = document.createElement('div');
-                    confetti.className = 'confetti';
-                    confetti.textContent = shapes[Math.floor(Math.random() * shapes.length)];
-                    confetti.style.left = Math.random() * 100 + 'vw';
-                    confetti.style.top = '-20px';
-                    confetti.style.fontSize = (Math.random() * 15 + 10) + 'px';
-                    confetti.style.animationDuration = (Math.random() * 2 + 2) + 's';
-                    confetti.style.animationDelay = (Math.random() * 0.5) + 's';
-                    
-                    container.appendChild(confetti);
-                    
-                    // Remove after animation
-                    setTimeout(() => confetti.remove(), 4000);
-                }, i * 50);
-            }
-        }
-        
-        // Click Yes - Show second screen
-        function clickYes() {
-            // Create confetti
-            createConfetti();
-            
-            // Hide first screen
-            screen1.classList.remove('screen-visible');
-            screen1.classList.add('screen-hidden');
-            
-            // Show second screen
-            setTimeout(() => {
-                screen2.classList.remove('screen-hidden');
-                screen2.classList.add('screen-visible');
-            }, 300);
-        }
-        
-        // Go back to first screen from screen2
-        function goBack() {
-            // Hide second screen
-            screen2.classList.remove('screen-visible');
-            screen2.classList.add('screen-hidden');
-            
-            // Show first screen
-            setTimeout(() => {
-                screen1.classList.remove('screen-hidden');
-                screen1.classList.add('screen-visible');
-                
-                // Reset No button position
-                const btnNo = document.getElementById('btnNo');
-                btnNo.style.position = '';
-                btnNo.style.left = '';
-                btnNo.style.top = '';
-                btnNo.style.zIndex = '';
-            }, 300);
-        }
-        
-        // Prevent No button from being clicked (only move on hover/click)
-        document.getElementById('btnNo').addEventListener('click', function(e) {
-            e.preventDefault();
-            e.stopPropagation();
-        });
-        
-        // Handle window resize - reset button positions
-        window.addEventListener('resize', function() {
-            const btnNo = document.getElementById('btnNo');
-            if (btnNo.style.position === 'fixed') {
-                btnNo.style.position = '';
-                btnNo.style.left = '';
-                btnNo.style.top = '';
-                btnNo.style.zIndex = '';
-            }
-        });
-    </script>
+<button id="btnNo" onmouseenter="moveNoButton()" onclick="moveNoButton()" class="btn-no px-8 py-4 rounded-full text-xl">
+😅 No
+</button>
+</div>
+
+</div>
+
+<!-- SCREEN 2 -->
+<div id="screen2" class="screen screen-hidden min-h-screen flex flex-col items-center justify-center text-center p-6 overflow-y-auto">
+
+<!-- IMAGE -->
+<div class="w-56 h-56 rounded-full overflow-hidden border-4 border-white shadow-xl mb-6">
+<!-- ✅ CHANGE THIS IMAGE -->
+<img src="https://i.ibb.co/NnZ9KKfH/Screenshot-2026-02-13-231427.png" class="w-full h-full object-cover">
+</div>
+
+<h2 class="font-romantic text-4xl text-red-500 mb-4">
+My Valentine 💕
+</h2>
+
+<!-- ✅ whitespace-pre-line added -->
+<p class="font-romantic text-2xl text-pink-600 whitespace-pre-line leading-relaxed max-w-xl">
+
+Happy Valentine’s Day, my love ❤️
+
+Since 18th August 2024, when we started dating, my life has changed in the most beautiful way. We may have fallen in love a little later, but from the very beginning, being with you made me feel truly lovable.
+
+You didn’t just love me, you made me fall in love with you in the most unexpected and magical way.
+
+Yes, we fight a lot sometimes, but even in our fights, my heart has never stopped choosing you.
+
+No matter what happens, you are always here in my heart.
+
+I truly hope we end up together, growing, loving, and choosing each other every single day.
+
+I love you more than words can explain. 💖
+</p>
+
+<button onclick="goBack()" class="mt-8 text-pink-500 text-lg">
+← Back
+</button>
+
+</div>
+
+<div id="confettiContainer"></div>
+
+<script>
+const screen1=document.getElementById('screen1')
+const screen2=document.getElementById('screen2')
+
+function clickYes(){
+createConfetti()
+screen1.classList.replace('screen-visible','screen-hidden')
+setTimeout(()=>screen2.classList.replace('screen-hidden','screen-visible'),300)
+}
+
+function goBack(){
+screen2.classList.replace('screen-visible','screen-hidden')
+setTimeout(()=>screen1.classList.replace('screen-hidden','screen-visible'),300)
+}
+
+function moveNoButton(){
+const btn=document.getElementById('btnNo')
+btn.style.position='fixed'
+btn.style.left=Math.random()*80+'vw'
+btn.style.top=Math.random()*80+'vh'
+}
+
+function createConfetti(){
+const c=document.getElementById('confettiContainer')
+for(let i=0;i<25;i++){
+let d=document.createElement('div')
+d.className='confetti'
+d.innerHTML='💖'
+d.style.left=Math.random()*100+'vw'
+d.style.fontSize=(20+Math.random()*20)+'px'
+c.appendChild(d)
+setTimeout(()=>d.remove(),3000)
+}
+}
+</script>
+
 </body>
 </html>
